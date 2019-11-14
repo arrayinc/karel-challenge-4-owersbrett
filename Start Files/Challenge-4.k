@@ -1,9 +1,52 @@
-/* File: Challenge-4.k
+/* File: Challenge-3.k
  ---------------------------
-Generalize the program you wrote in Challenge 3 so that Karel
-is able to climb a stair-step mountain of any height and place
-a flag on its top.
+Write a program that teaches Karel to climb a mountain.
 
-Thus, in addition to climbing the mountain in that exercise,
-it should be able to scale a molehill or Mount Everest.
+The steps involved are to:
+
+1. Move up to the mountain.
+2. Climb each of the four stair steps to reach the summit.
+3. Plant a flag (represented by a beeper, of course) at the top of the mountain.
+4. Climb down each of the four stair steps on the opposite side.
+5. Move forward to the east end of the world.
+
 */
+
+import "turns";
+
+function Solve(){
+	moveToMountain();
+	climbUp();
+	putBeeper();
+	climbDown();
+	climbUp();
+	putBeeper();
+	climbDown();
+	climbUp();
+	putBeeper();
+	climbDown();
+}
+
+function moveToMountain(){
+	move();
+}
+
+function climbUp(){
+	while(frontIsBlocked()){
+		turnLeft();
+		move();
+		turnRight();
+		move();
+	}
+}
+
+function climbDown(){
+	while(frontIsClear()){
+		move();
+		if(rightIsClear()){
+			turnRight();
+			move();
+			turnLeft();
+		}
+	}
+}
